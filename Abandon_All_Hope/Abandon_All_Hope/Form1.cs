@@ -28,7 +28,15 @@ namespace Abandon_All_Hope
             {
                 // Create a new Bitmap object from the picture file on disk,
                 // and assign that to the PictureBox.Image property
-                pictureBox1.Image = new Bitmap(ofd.FileName);
+                try
+                {
+                    pictureBox1.Image = new Bitmap(ofd.FileName);
+                }
+                catch (System.ArgumentException error)
+                {
+                    MessageBox.Show("File type not supported.", "Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    return;
+                }
                 lblDir.Text = ofd.FileName;
             }
             ofd.Dispose();

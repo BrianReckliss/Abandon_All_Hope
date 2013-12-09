@@ -18,11 +18,24 @@ namespace Abandon_All_Hope
         List<string> files;
         int index = 0;
         int iScroll = 0;
+        public string filename_view = "";
 
         //Constructor
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public bool file_is_valid(string name)
+        {
+            string[] w = new string[4] { ".jpg", ".jpeg", ".gif", ".png" };
+            int x;
+            for (x = 0; x < w.Length; ++x)
+            {
+                if(name.ToLower().Contains(w[x]))
+                    return true;
+            }
+            return false;
         }
 
         //######################Fix shit in here
@@ -32,11 +45,52 @@ namespace Abandon_All_Hope
             ofd.Title = "Select Image";
             ofd.Filter = "Picture Files (*.jpeg, *.jpg, *.png, )|*.jpeg;*.jpg;*.png;*.gif|All Files (*.*)|*.*|GIF Files (*.gif)|*.gif";
             ofd.ShowDialog();
+            index = 0;
 
-            picBox1.Image = Bitmap.FromFile(ofd.FileName);
+            try
+            {
+                picBox1.Image = Bitmap.FromFile(ofd.FileName);
+                filename_view = ofd.FileName;
+
+            }
+            catch (System.OutOfMemoryException error)
+            {
+                picBox1.Image = null;
+                index = -1;
+                filename_view = "Invalid file: " + ofd.FileName;
+            }
+            catch (System.ArgumentException error)
+            {
+                picBox1.Image = null;
+                index = -1;
+                filename_view = "Invalid file: " + ofd.FileName;
+            }
+
             string filePath = ofd.FileName;
             string directoryPath = Path.GetDirectoryName(filePath);
             files = new List<string>(Directory.EnumerateFiles(directoryPath));
+
+            //this code is used to remove any files from our files list that are invalid
+            int x = 0;
+            for (x = 0; x < files.Count; ++x)
+            {
+                if (file_is_valid(files[x]))
+                {
+                    continue;
+                }
+                else
+                {
+                    files.RemoveAt(x);
+                    x--;
+                }
+            }
+
+            //now that we've gotten rid of our garbage files, figure out which index the file we opened uses
+            for (x = 0; x < files.Count; ++x)
+            {
+                if (ofd.FileName == files[x])
+                    index = x;
+            }
 
             timerScroll.Start();
         }
@@ -49,7 +103,6 @@ namespace Abandon_All_Hope
             --index;
             if (index < 0)
                 index = files.Count - 1;
-
             picBox1.Image = Bitmap.FromFile(files[index]);
             timerScroll.Start();
         }
@@ -82,13 +135,13 @@ namespace Abandon_All_Hope
         private void timerScroll_Tick(object sender, EventArgs e)
         {
             iScroll++;
-            int iLmt = files[index].Length - iScroll;
+            int iLmt = filename_view.Length - iScroll;
             if (iLmt < 50)
                 iScroll = 0;
             if (iScroll == 0)
                 timerScroll.Stop();
 
-            string str = files[index].Substring(iScroll, 50);
+            string str = filename_view.Substring(iScroll, 50);
             lblDir.Text = str;
         }
 

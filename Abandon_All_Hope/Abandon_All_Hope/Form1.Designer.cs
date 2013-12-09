@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnOpen = new System.Windows.Forms.Button();
             this.bGroupTagging = new System.Windows.Forms.GroupBox();
             this.lblTags = new System.Windows.Forms.Label();
@@ -36,7 +37,6 @@
             this.rbtnSFW = new System.Windows.Forms.RadioButton();
             this.lblSafe = new System.Windows.Forms.Label();
             this.picBox1 = new System.Windows.Forms.PictureBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.TabContainer = new System.Windows.Forms.TabControl();
             this.ViewTab = new System.Windows.Forms.TabPage();
             this.btnNextImg = new System.Windows.Forms.Button();
@@ -44,7 +44,7 @@
             this.btnPrevImg = new System.Windows.Forms.Button();
             this.SearchTab = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.timerScroll = new System.Windows.Forms.Timer(this.components);
             this.bGroupTagging.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             this.TabContainer.SuspendLayout();
@@ -143,10 +143,6 @@
             this.picBox1.TabIndex = 4;
             this.picBox1.TabStop = false;
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "Open File";
-            // 
             // TabContainer
             // 
             this.TabContainer.Controls.Add(this.ViewTab);
@@ -232,6 +228,11 @@
             this.splitContainer1.SplitterDistance = 261;
             this.splitContainer1.TabIndex = 6;
             // 
+            // timerScroll
+            // 
+            this.timerScroll.Interval = 200;
+            this.timerScroll.Tick += new System.EventHandler(this.timerScroll_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,7 +264,6 @@
         private System.Windows.Forms.Label lblSafe;
         private System.Windows.Forms.Label lblDir;
         private System.Windows.Forms.PictureBox picBox1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lblTags;
         private System.Windows.Forms.TabControl TabContainer;
         private System.Windows.Forms.TabPage ViewTab;
@@ -272,7 +272,7 @@
         private System.Windows.Forms.Button btnNextImg;
         private System.Windows.Forms.Button btnScale;
         private System.Windows.Forms.Button btnPrevImg;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Timer timerScroll;
     }
 }
 

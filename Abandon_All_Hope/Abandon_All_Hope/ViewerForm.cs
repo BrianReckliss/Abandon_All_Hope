@@ -13,29 +13,31 @@ using System.Windows.Forms;
 
 namespace Abandon_All_Hope
 {
-    public partial class Form1 : Form
+    public partial class ViewerForm : Form
     {
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // Class Variables
+        ///////////////////////////////////////////////////////////////////////////////////////
+
+        //List of files in directory we are currently browsing
+        //When this list is populated, invalid files are removed
         List<string> files;
-        int index = 0;
-        int iScroll = 0;
+
+        //Index of file in files list we are currently viewing
+        int fileIndex = 0;
+
+        //Name for marquis
         public string filename_view = "";
 
-        //Constructor
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // Class Methods
+        ///////////////////////////////////////////////////////////////////////////////////////
 
-        public bool file_is_valid(string name)
+        //Constructor
+        public ViewerForm()
         {
-            string[] w = new string[4] { ".jpg", ".jpeg", ".gif", ".png" };
-            int x;
-            for (x = 0; x < w.Length; ++x)
-            {
-                if(name.ToLower().Contains(w[x]))
-                    return true;
-            }
-            return false;
+            FilenameScroll.init();
+            InitializeComponent();
         }
 
         //######################Fix shit in here
@@ -45,7 +47,7 @@ namespace Abandon_All_Hope
             ofd.Title = "Select Image";
             ofd.Filter = "Picture Files (*.jpeg, *.jpg, *.png, )|*.jpeg;*.jpg;*.png;*.gif|All Files (*.*)|*.*|GIF Files (*.gif)|*.gif";
             ofd.ShowDialog();
-            index = 0;
+            fileIndex = 0;
 
             try
             {
@@ -56,25 +58,28 @@ namespace Abandon_All_Hope
             catch (System.OutOfMemoryException error)
             {
                 picBox1.Image = null;
-                index = -1;
+                fileIndex = -1;
                 filename_view = "Invalid file: " + ofd.FileName;
             }
             catch (System.ArgumentException error)
             {
                 picBox1.Image = null;
-                index = -1;
+                fileIndex = -1;
                 filename_view = "Invalid file: " + ofd.FileName;
             }
 
             string filePath = ofd.FileName;
-            string directoryPath = Path.GetDirectoryName(filePath);
-            files = new List<string>(Directory.EnumerateFiles(directoryPath));
+            if (filePath != "")
+            {
+                string directoryPath = Path.GetDirectoryName(filePath);
+                files = new List<string>(Directory.EnumerateFiles(directoryPath));
+            }
 
             //this code is used to remove any files from our files list that are invalid
             int x = 0;
             for (x = 0; x < files.Count; ++x)
             {
-                if (file_is_valid(files[x]))
+                if (FileUtils.file_is_valid(files[x]))
                 {
                     continue;
                 }
@@ -89,10 +94,10 @@ namespace Abandon_All_Hope
             for (x = 0; x < files.Count; ++x)
             {
                 if (ofd.FileName == files[x])
-                    index = x;
+                    fileIndex = x;
             }
 
-            timerScroll.Start();
+            FilenameScroll.StartScroll();
         }
 
 
@@ -100,11 +105,12 @@ namespace Abandon_All_Hope
         // Previous Image in Directory
         private void btnPrevImg_Click(object sender, EventArgs e)
         {
-            --index;
-            if (index < 0)
-                index = files.Count - 1;
-            picBox1.Image = Bitmap.FromFile(files[index]);
-            timerScroll.Start();
+            --fileIndex;
+            if (fileIndex < 0)
+                fileIndex = files.Count - 1;
+            picBox1.Image = Bitmap.FromFile(files[fileIndex]);
+            filename_view = files[fileIndex];
+            FilenameScroll.StartScroll();
         }
 
 
@@ -123,26 +129,19 @@ namespace Abandon_All_Hope
         // Next Image in Directory
         private void btnNextImg_Click(object sender, EventArgs e)
         {
-            ++index;
-            if (index >= files.Count)
-                index = 0;
-            picBox1.Image = Bitmap.FromFile(files[index]);
-            timerScroll.Start();
+            ++fileIndex;
+            if (fileIndex >= files.Count)
+                fileIndex = 0;
+            picBox1.Image = Bitmap.FromFile(files[fileIndex]);
+            filename_view = files[fileIndex];
+            FilenameScroll.StartScroll();
         }
 
 
         // Timer for Scrolling Directory Label
         private void timerScroll_Tick(object sender, EventArgs e)
         {
-            iScroll++;
-            int iLmt = filename_view.Length - iScroll;
-            if (iLmt < 50)
-                iScroll = 0;
-            if (iScroll == 0)
-                timerScroll.Stop();
-
-            string str = filename_view.Substring(iScroll, 50);
-            lblDir.Text = str;
+            FilenameScroll.scroll();
         }
 
 

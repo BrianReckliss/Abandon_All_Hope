@@ -1,6 +1,6 @@
 ﻿namespace Abandon_All_Hope
 {
-    partial class Form1
+    partial class ViewerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -107,13 +107,13 @@
             this.rbtnNSFW.Name = "rbtnNSFW";
             this.rbtnNSFW.Size = new System.Drawing.Size(57, 17);
             this.rbtnNSFW.TabIndex = 2;
-            this.rbtnNSFW.TabStop = true;
             this.rbtnNSFW.Text = "NSFW";
             this.rbtnNSFW.UseVisualStyleBackColor = true;
             // 
             // rbtnSFW
             // 
             this.rbtnSFW.AutoSize = true;
+            this.rbtnSFW.Checked = true;
             this.rbtnSFW.Location = new System.Drawing.Point(49, 68);
             this.rbtnSFW.Name = "rbtnSFW";
             this.rbtnSFW.Size = new System.Drawing.Size(49, 17);
@@ -257,22 +257,22 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnOpen;
-        private System.Windows.Forms.GroupBox bGroupTagging;
-        private System.Windows.Forms.RadioButton rbtnNSFW;
-        private System.Windows.Forms.RadioButton rbtnSFW;
-        private System.Windows.Forms.Label lblSafe;
-        private System.Windows.Forms.Label lblDir;
-        private System.Windows.Forms.PictureBox picBox1;
-        private System.Windows.Forms.Label lblTags;
-        private System.Windows.Forms.TabControl TabContainer;
-        private System.Windows.Forms.TabPage ViewTab;
-        private System.Windows.Forms.TabPage SearchTab;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Button btnNextImg;
-        private System.Windows.Forms.Button btnScale;
-        private System.Windows.Forms.Button btnPrevImg;
-        private System.Windows.Forms.Timer timerScroll;
+        public System.Windows.Forms.Button btnOpen;
+        public System.Windows.Forms.GroupBox bGroupTagging;
+        public System.Windows.Forms.RadioButton rbtnNSFW;
+        public System.Windows.Forms.RadioButton rbtnSFW;
+        public System.Windows.Forms.Label lblSafe;
+        public System.Windows.Forms.Label lblDir;
+        public System.Windows.Forms.PictureBox picBox1;
+        public System.Windows.Forms.Label lblTags;
+        public System.Windows.Forms.TabControl TabContainer;
+        public System.Windows.Forms.TabPage ViewTab;
+        public System.Windows.Forms.TabPage SearchTab;
+        public System.Windows.Forms.SplitContainer splitContainer1;
+        public System.Windows.Forms.Button btnNextImg;
+        public System.Windows.Forms.Button btnScale;
+        public System.Windows.Forms.Button btnPrevImg;
+        public System.Windows.Forms.Timer timerScroll;
     }
 }
 

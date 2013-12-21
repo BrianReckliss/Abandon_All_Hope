@@ -145,7 +145,6 @@ namespace Abandon_All_Hope
         }
 
 
-
         /* Resize Thumbnail(s)
         private void resizeImage(string path, string originalFilename,
                      int canvasWidth, int canvasHeight,

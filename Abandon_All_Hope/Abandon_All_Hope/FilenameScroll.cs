@@ -8,10 +8,15 @@ namespace Abandon_All_Hope
     class FilenameScroll
     {
         public static int scrollIndex = 0;
-        public static int displaylength = 50;
-        public static int tickspeed = 200;
-        public static int freezespeed = 5000;
+        public static int tickspeed = 100;
+        public static int freezespeed = 3000;
         public static string fancypants;
+
+        /*////////////////////////////////////////////////////////////////////////////////////////////////////*/
+        /*//////// I want to use the width of panel1Tagging.Size to make an adjustable display length ////////*/
+        /*////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+        public static int displaylength = Program.VForm.;
 
         public static void init()
         {

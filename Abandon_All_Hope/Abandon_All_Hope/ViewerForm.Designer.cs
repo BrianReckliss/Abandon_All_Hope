@@ -43,23 +43,24 @@
             this.btnScale = new System.Windows.Forms.Button();
             this.btnPrevImg = new System.Windows.Forms.Button();
             this.SearchTab = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.timerScroll = new System.Windows.Forms.Timer(this.components);
+            this.panel1Tagging = new System.Windows.Forms.Panel();
+            this.panel2Viewer = new System.Windows.Forms.Panel();
             this.bGroupTagging.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             this.TabContainer.SuspendLayout();
             this.ViewTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.panel1Tagging.SuspendLayout();
+            this.panel2Viewer.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpen
             // 
+            this.btnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpen.Location = new System.Drawing.Point(6, 19);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(75, 25);
+            this.btnOpen.Size = new System.Drawing.Size(188, 25);
             this.btnOpen.TabIndex = 0;
             this.btnOpen.Text = "Open";
             this.btnOpen.UseVisualStyleBackColor = true;
@@ -76,10 +77,11 @@
             this.bGroupTagging.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bGroupTagging.Location = new System.Drawing.Point(0, 0);
             this.bGroupTagging.Name = "bGroupTagging";
-            this.bGroupTagging.Size = new System.Drawing.Size(261, 562);
+            this.bGroupTagging.Size = new System.Drawing.Size(200, 468);
             this.bGroupTagging.TabIndex = 2;
             this.bGroupTagging.TabStop = false;
             this.bGroupTagging.Text = "Tagging:";
+            this.bGroupTagging.Enter += new System.EventHandler(this.bGroupTagging_Enter);
             // 
             // lblTags
             // 
@@ -94,7 +96,7 @@
             // 
             this.lblDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDir.AutoSize = true;
-            this.lblDir.Location = new System.Drawing.Point(3, 546);
+            this.lblDir.Location = new System.Drawing.Point(6, 446);
             this.lblDir.Name = "lblDir";
             this.lblDir.Size = new System.Drawing.Size(64, 13);
             this.lblDir.TabIndex = 3;
@@ -136,9 +138,9 @@
             this.picBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBox1.Location = new System.Drawing.Point(0, 0);
+            this.picBox1.Location = new System.Drawing.Point(1, 3);
             this.picBox1.Name = "picBox1";
-            this.picBox1.Size = new System.Drawing.Size(511, 499);
+            this.picBox1.Size = new System.Drawing.Size(682, 405);
             this.picBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBox1.TabIndex = 4;
             this.picBox1.TabStop = false;
@@ -151,7 +153,7 @@
             this.TabContainer.Location = new System.Drawing.Point(0, 0);
             this.TabContainer.Name = "TabContainer";
             this.TabContainer.SelectedIndex = 0;
-            this.TabContainer.Size = new System.Drawing.Size(519, 562);
+            this.TabContainer.Size = new System.Drawing.Size(690, 468);
             this.TabContainer.TabIndex = 5;
             // 
             // ViewTab
@@ -163,7 +165,7 @@
             this.ViewTab.Location = new System.Drawing.Point(4, 22);
             this.ViewTab.Name = "ViewTab";
             this.ViewTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ViewTab.Size = new System.Drawing.Size(511, 536);
+            this.ViewTab.Size = new System.Drawing.Size(682, 442);
             this.ViewTab.TabIndex = 0;
             this.ViewTab.Text = "View";
             this.ViewTab.UseVisualStyleBackColor = true;
@@ -171,7 +173,7 @@
             // btnNextImg
             // 
             this.btnNextImg.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnNextImg.Location = new System.Drawing.Point(299, 505);
+            this.btnNextImg.Location = new System.Drawing.Point(385, 411);
             this.btnNextImg.Name = "btnNextImg";
             this.btnNextImg.Size = new System.Drawing.Size(75, 23);
             this.btnNextImg.TabIndex = 7;
@@ -182,7 +184,7 @@
             // btnScale
             // 
             this.btnScale.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnScale.Location = new System.Drawing.Point(218, 505);
+            this.btnScale.Location = new System.Drawing.Point(304, 411);
             this.btnScale.Name = "btnScale";
             this.btnScale.Size = new System.Drawing.Size(75, 23);
             this.btnScale.TabIndex = 6;
@@ -193,7 +195,7 @@
             // btnPrevImg
             // 
             this.btnPrevImg.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnPrevImg.Location = new System.Drawing.Point(137, 505);
+            this.btnPrevImg.Location = new System.Drawing.Point(223, 411);
             this.btnPrevImg.Name = "btnPrevImg";
             this.btnPrevImg.Size = new System.Drawing.Size(75, 23);
             this.btnPrevImg.TabIndex = 5;
@@ -206,51 +208,51 @@
             this.SearchTab.Location = new System.Drawing.Point(4, 22);
             this.SearchTab.Name = "SearchTab";
             this.SearchTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchTab.Size = new System.Drawing.Size(511, 536);
+            this.SearchTab.Size = new System.Drawing.Size(682, 442);
             this.SearchTab.TabIndex = 1;
             this.SearchTab.Text = "Search";
             this.SearchTab.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.bGroupTagging);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.TabContainer);
-            this.splitContainer1.Size = new System.Drawing.Size(784, 562);
-            this.splitContainer1.SplitterDistance = 261;
-            this.splitContainer1.TabIndex = 6;
             // 
             // timerScroll
             // 
             this.timerScroll.Interval = 200;
             this.timerScroll.Tick += new System.EventHandler(this.timerScroll_Tick);
             // 
-            // Form1
+            // panel1Tagging
+            // 
+            this.panel1Tagging.Controls.Add(this.bGroupTagging);
+            this.panel1Tagging.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1Tagging.Location = new System.Drawing.Point(0, 0);
+            this.panel1Tagging.Name = "panel1Tagging";
+            this.panel1Tagging.Size = new System.Drawing.Size(200, 468);
+            this.panel1Tagging.TabIndex = 6;
+            // 
+            // panel2Viewer
+            // 
+            this.panel2Viewer.Controls.Add(this.TabContainer);
+            this.panel2Viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2Viewer.Location = new System.Drawing.Point(200, 0);
+            this.panel2Viewer.Name = "panel2Viewer";
+            this.panel2Viewer.Size = new System.Drawing.Size(690, 468);
+            this.panel2Viewer.TabIndex = 7;
+            // 
+            // ViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(890, 468);
+            this.Controls.Add(this.panel2Viewer);
+            this.Controls.Add(this.panel1Tagging);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "ViewerForm";
+            this.Text = "Image Viewer";
             this.bGroupTagging.ResumeLayout(false);
             this.bGroupTagging.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).EndInit();
             this.TabContainer.ResumeLayout(false);
             this.ViewTab.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.panel1Tagging.ResumeLayout(false);
+            this.panel2Viewer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -268,11 +270,12 @@
         public System.Windows.Forms.TabControl TabContainer;
         public System.Windows.Forms.TabPage ViewTab;
         public System.Windows.Forms.TabPage SearchTab;
-        public System.Windows.Forms.SplitContainer splitContainer1;
         public System.Windows.Forms.Button btnNextImg;
         public System.Windows.Forms.Button btnScale;
         public System.Windows.Forms.Button btnPrevImg;
         public System.Windows.Forms.Timer timerScroll;
+        private System.Windows.Forms.Panel panel1Tagging;
+        private System.Windows.Forms.Panel panel2Viewer;
     }
 }
 

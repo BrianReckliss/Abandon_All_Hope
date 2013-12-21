@@ -16,7 +16,10 @@ namespace Abandon_All_Hope
         /*//////// I want to use the width of panel1Tagging.Size to make an adjustable display length ////////*/
         /*////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-        public static int displaylength = Program.VForm.;
+
+        //characters in name
+        public static int displaylength = 50;
+        public static int w = Program.VForm.panel1Tagging.Width;
 
         public static void init()
         {

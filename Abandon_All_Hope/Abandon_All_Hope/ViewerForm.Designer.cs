@@ -274,8 +274,8 @@
         public System.Windows.Forms.Button btnScale;
         public System.Windows.Forms.Button btnPrevImg;
         public System.Windows.Forms.Timer timerScroll;
-        private System.Windows.Forms.Panel panel1Tagging;
-        private System.Windows.Forms.Panel panel2Viewer;
+        public System.Windows.Forms.Panel panel1Tagging;
+        public System.Windows.Forms.Panel panel2Viewer;
     }
 }
 

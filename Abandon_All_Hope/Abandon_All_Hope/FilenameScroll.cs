@@ -19,7 +19,7 @@ namespace Abandon_All_Hope
 
         //characters in name
         public static int displaylength = 50;
-        public static int w = Program.VForm.panel1Tagging.Width;
+        public static int lblLength = Program.VForm.panel1Tagging.Width;
 
         public static void init()
         {

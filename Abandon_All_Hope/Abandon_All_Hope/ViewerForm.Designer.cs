@@ -81,7 +81,6 @@
             this.bGroupTagging.TabIndex = 2;
             this.bGroupTagging.TabStop = false;
             this.bGroupTagging.Text = "Tagging:";
-            this.bGroupTagging.Enter += new System.EventHandler(this.bGroupTagging_Enter);
             // 
             // lblTags
             // 

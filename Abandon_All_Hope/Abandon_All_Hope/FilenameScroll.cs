@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Abandon_All_Hope
 {
-    class FilenameScroll
+    public class FilenameScroll
     {
-        public static int scrollIndex = 0;
-        public static int tickspeed = 100;
-        public static int freezespeed = 3000;
-        public static string fancypants;
+        public int scrollIndex = 0;
+        public int tickspeed = 100;
+        public int freezespeed = 3000;
+        public string fancypants;
 
         /*////////////////////////////////////////////////////////////////////////////////////////////////////*/
         /*//////// I want to use the width of panel1Tagging.Size to make an adjustable display length ////////*/
@@ -18,11 +18,13 @@ namespace Abandon_All_Hope
 
 
         //characters in name
-        public static int displaylength = 50;
-        public static int lblLength = Program.VForm.panel1Tagging.Width;
+        public int displaylength = 50;
+        public int lblLength;
 
-        public static void init()
+        public FilenameScroll()
         {
+            displaylength = 50;
+            lblLength = 200;//default size of panel at regular resolution
             fancypants = "";
             int x = displaylength;
             while (x > 0)
@@ -32,7 +34,22 @@ namespace Abandon_All_Hope
             }
         }
 
-        public static void StartScroll()
+        //if the filenamescroll is initialized with the viewerform creating it, you can get the form data without a nullref
+        //doing this with pointers in c++ seems like it would be much safer
+        public FilenameScroll(ViewerForm f)
+        {
+            displaylength = 50;
+            lblLength = f.panel1Tagging.Size.Width;
+            fancypants = "";
+            int x = displaylength;
+            while (x > 0)
+            {
+                fancypants += " ";
+                --x;
+            }
+        }
+
+        public void StartScroll()
         {
             scrollIndex = -1;
             Program.VForm.timerScroll.Interval = freezespeed;
@@ -49,7 +66,7 @@ namespace Abandon_All_Hope
             Program.VForm.timerScroll.Start();
         }
 
-        public static void scroll()
+        public void scroll()
         {
             Program.VForm.timerScroll.Interval = tickspeed;
 

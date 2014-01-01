@@ -18,7 +18,8 @@ namespace Abandon_All_Hope
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run((VForm = new ViewerForm()));
+            VForm = new ViewerForm();
+            Application.Run(VForm);
         }
     }
 }

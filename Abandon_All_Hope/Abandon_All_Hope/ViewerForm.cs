@@ -28,6 +28,7 @@ namespace Abandon_All_Hope
 
         //Name for marquis
         public string filename_view = "";
+        public FilenameScroll fscroll;
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Class Methods
@@ -36,8 +37,13 @@ namespace Abandon_All_Hope
         //Constructor
         public ViewerForm()
         {
-            FilenameScroll.init();
+            //this must happen first otherwise shit nulls
             InitializeComponent();
+            //initialize our files list and promptly clean it
+            files = new List<string>(Directory.EnumerateFiles("./"));
+            cleanfileslist(null);
+            //start our scroller
+            fscroll = new FilenameScroll(this);
         }
 
         //######################Fix shit in here
@@ -75,6 +81,14 @@ namespace Abandon_All_Hope
                 files = new List<string>(Directory.EnumerateFiles(directoryPath));
             }
 
+            cleanfileslist(ofd);
+
+            fscroll.StartScroll();
+        }
+
+        public void cleanfileslist(OpenFileDialog ofd)
+        {
+
             //this code is used to remove any files from our files list that are invalid
             int x = 0;
             for (x = 0; x < files.Count; ++x)
@@ -96,8 +110,6 @@ namespace Abandon_All_Hope
                 if (ofd.FileName == files[x])
                     fileIndex = x;
             }
-
-            FilenameScroll.StartScroll();
         }
 
 
@@ -105,12 +117,15 @@ namespace Abandon_All_Hope
         // Previous Image in Directory
         private void btnPrevImg_Click(object sender, EventArgs e)
         {
+            if (files.Count == 0)
+                return;
+
             --fileIndex;
             if (fileIndex < 0)
                 fileIndex = files.Count - 1;
             picBox1.Image = Bitmap.FromFile(files[fileIndex]);
             filename_view = files[fileIndex];
-            FilenameScroll.StartScroll();
+            fscroll.StartScroll();
         }
 
 
@@ -129,21 +144,23 @@ namespace Abandon_All_Hope
         // Next Image in Directory
         private void btnNextImg_Click(object sender, EventArgs e)
         {
+            if (files.Count == 0)
+                return;
+
             ++fileIndex;
             if (fileIndex >= files.Count)
                 fileIndex = 0;
             picBox1.Image = Bitmap.FromFile(files[fileIndex]);
             filename_view = files[fileIndex];
-            FilenameScroll.StartScroll();
+            fscroll.StartScroll();
         }
 
 
         // Timer for Scrolling Directory Label
         private void timerScroll_Tick(object sender, EventArgs e)
         {
-            FilenameScroll.scroll();
+            fscroll.scroll();
         }
-
 
         /* Resize Thumbnail(s)
         private void resizeImage(string path, string originalFilename,
